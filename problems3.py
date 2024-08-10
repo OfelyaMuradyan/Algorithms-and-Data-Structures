@@ -75,3 +75,46 @@ def maxSubArray(self, nums: List[int]) -> int:
         if max_end < 0:
             max_end = 0
     return max
+
+
+def findShortestSubArray(self, nums: List[int]) -> int:
+    di = {}
+    maxx_ls = []
+    for i in nums:
+        if i not in di:
+            di[i] = 1
+        else:
+            di[i] += 1
+    max_freq = max(di.values())
+    for i in di.keys():
+        if di[i] == max_freq:
+            maxx_ls.append(i)
+    print(di)
+
+    min = len(nums)
+    
+    for maxx in maxx_ls:
+        max_f = max_freq
+        seq = []
+        for i in range(len(nums)):
+            if nums[i] == maxx:
+                idx = i
+                break
+
+        while(max_f != 0):
+            seq.append(nums[idx])
+            if nums[idx] == maxx:
+                max_f -= 1
+            idx += 1
+        
+        if len(seq) < min:
+            min = len(seq)
+    return min
+
+
+
+
+def sortedSquares(self, nums: List[int]) -> List[int]:
+    ls = [abs(i)**2 for i in nums]
+    ls.sort()
+    return ls

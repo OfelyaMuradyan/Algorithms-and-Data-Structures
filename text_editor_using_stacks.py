@@ -12,7 +12,6 @@ class TextEditor:
         self.redo_stack = Stack()
 
     def undo(self):
-        """Undo the last action."""
         if not self.undo_stack.is_empty():
             last_action = self.undo_stack.pop()
             self.redo_stack.push(last_action)
@@ -20,7 +19,6 @@ class TextEditor:
             self.text = self.text[:-len(last_action)]
 
     def redo(self):
-        """Redo the last undone action."""
         if not self.redo_stack.is_empty():
             last_undone_action = self.redo_stack.pop()
             self.undo_stack.push(last_undone_action)
